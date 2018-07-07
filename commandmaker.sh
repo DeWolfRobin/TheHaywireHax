@@ -1,2 +1,2 @@
 chmod 755 $1
-cp $1 /usr/bin/$2
+ln $1 /usr/bin/$2
