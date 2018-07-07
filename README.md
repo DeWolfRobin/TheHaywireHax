@@ -9,4 +9,4 @@ A script that searches for all the git repos and starts a *git commit*.
 This helps to create commands just by making a *.sh* into an executable and copying it to */usr/bin/*.
 
 ## Search
-Searches for a given files.
+Searches for a given keyword.
