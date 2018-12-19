@@ -56,8 +56,20 @@ mdir() {
  mkdir "$1" 2>/dev/null 1>/dev/null
 }
 
+getsubdomains(){ # to be implemented
+  python ~/tools/Sublist3r/sublist3r.py -d $domain -t 10 -v -o ./$domain/$foldername/$domain.txt #make var for path
+  curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain >> "$dir/$domain.txt"
+}
+
+
+screenshot(){ # to be implemented
+    echo "taking a screenshot of $line"
+    python ~/tools/webscreenshot/webscreenshot.py -o ./$domain/$foldername/screenshots/ -i ./$domain/$foldername/responsive-$(date +"%Y-%m-%d").txt --timeout=10 -m
+}
+
+
 dowfuzz() {
-wfuzz -f "$dir/wfuzz.html",html -w $wordlist -c -L -R 5 -Z --filter "c!=404" -u $urlscheme"://"$1/FUZZ
+	wfuzz -f "$dir/wfuzz.html",html -w $wordlist -c -L -R 5 -Z --filter "c!=404" -u $urlscheme"://"$1/FUZZ
 }
 
 niktoscan() {
@@ -67,8 +79,8 @@ niktoscan() {
 
 recon() {
 # start the script here
-niktoscan $domain $port
-dowfuzz $domain
+niktoscan $1 $2
+dowfuzz $1
 
 }
 
@@ -78,7 +90,7 @@ if (curl -X HEAD $curlflag -i -s $domain 2>/dev/null 1>/dev/null) then #optimize
 	mdir "$domain"
 	mdir "$domain/$startdate"
 	dir="$domain/$startdate"
-	recon
+	recon $domain $port
 else
 	echo "cannot connect to $domain"
 fi
