@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+ <title>Nikto Report</title>
+ <style type="text/css">
+  .dataTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 11pt; 
+   font-weight: normal; 
+   color: #000066;
+   background: #EEEEEE;
+   border: thin solid black;
+   width: 95%;
+  }
+  .headerTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 15pt; 
+   font-weight: normal; 
+   color: white;
+   background: #000066;
+   border: thin solid black;
+   width: 300px;
+  }
+  .column-head
+  {
+   width: 15em;
+   font-weight:bold;
+  }
+  .copyright
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: black;
+  }
+  body
+  {
+   background: white;
+  }
+ </style>
+</head>
+<body>
+<div>
+<a name="1"></a>
+<table class="headerTable">
+ <tr>
+   <td>localhost / 127.0.0.1 port 443</td>
+ </tr>
+</table>
+<table class="dataTable">
+ <tr>
+   <td class="column-head">Target IP</td>
+   <td>127.0.0.1</td>
+ </tr>
+ <tr>
+   <td class="column-head">Target hostname</td>
+   <td>localhost</td>
+ </tr>
+  <tr>
+   <td class="column-head">Target Port</td>
+   <td>443</td>
+ </tr>
+  <tr>
+   <td class="column-head">HTTP Server</td>
+   <td></td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (Name)</td>
+   <td><a href="https://localhost:443/">https://localhost:443/</a></td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (IP)</td>
+   <td><a href="https://127.0.0.1:443/">https://127.0.0.1:443/</a></td>
+ </tr>
+ </table>
+</div>
+<p></p>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="https://localhost:443/">https://localhost:443/</a><br>
+      <a href="https://127.0.0.1:443/">https://127.0.0.1:443/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>#TEMPL_URI#</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>#TEMPL_HTTP_METHOD#</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>#TEMPL_MSG#</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="#TEMPL_ITEM_NAME_LINK#">#TEMPL_ITEM_NAME_LINK#</a><br>
+      <a href="#TEMPL_ITEM_IP_LINK#">#TEMPL_ITEM_IP_LINK#</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="#TEMPL_OSVDB_LINK#" title="More vulnerability information on OSVDB.org">OSVDB-#TEMPL_OSVDB#</a>
+    </td>
+</table>
+
+<div>
+<p></p>
+<table class="headerTable">
+ <tr>
+  <td>Host Summary</td>
+ </tr>
+</table>
+<table  class="dataTable">
+ <tr>
+  <td class="column-head">Start Time</td>
+  <td>1970-01-01 01:00:00</td>
+ </tr>
+ <tr>
+  <td class="column-head">End Time</td>
+  <td>2018-12-19 08:23:20</td>
+ </tr>
+ <tr>
+  <td class="column-head">Elapsed Time</td>
+  <td>1545204200 seconds</td>
+ </tr>
+ <tr>
+  <td class="column-head">Statistics</td>
+  <td>1262 requests,  errors,  findings</td>
+ </tr>
+</table>
+</div>
+<p></p>
+
+<p></p>
+<table class="headerTable">
+  <tr>
+    <td>Scan Summary</td>
+  </tr>
+</table>
+<table class="dataTable">
+  <tr>
+    <td class="column-head">Software Details</td>
+    <td><a href="http://cirt.net/">Nikto 2.1.6</a></td>
+  <tr>
+    <td class="column-head">CLI Options</td>
+    <td>-host https://localhost -port 443 -Format html -output localhost/19-12-2018 08:23:12/nikto.html</td>
+  </tr>
+  <tr>
+    <td class="column-head">Hosts Tested</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td class="column-head">Start Time</td>
+    <td>Wed Dec 19 08:23:12 2018</td>
+  </tr>
+  <tr>
+    <td class="column-head">End Time</td>
+    <td>Thu Jan  1 01:00:00 1970</td>
+  </tr>
+  <tr>
+    <td class="column-head">Elapsed Time</td>
+    <td> seconds</td>
+  </tr>
+</table>
+<p></p>
+<p class="copyright">&copy; 2008 CIRT, Inc.</p>
+
+<!-- (c) 2008 CIRT, Inc. -->
+
+</body>
+</html>
+
