@@ -9,25 +9,24 @@ root=
 startdate="`date +"%d-%m-%Y %H:%M:%S"`"
 dir=
 wordlist="/usr/share/wordlists/wfuzz/general/megabeast.txt"
+bburp=true
 
 # script
 usage() {
-echo -e "Usage: $0 [-d] <domain>" 1>&2; exit 1;
+echo -e "Usage:\n\t$0 [-d] <domain>\n\nOptions:\n\t-b\t\t Disable burpsuite scan" 1>&2; exit 1;
 }
 
-while getopts ":sdh:" o; do
+while getopts ":bdh:" o; do
     case "${o}" in
-	:)
-		echo "Option -$OPTARG requires an argument."
-		;;
+	#:)
+	#	echo "Option -$OPTARG requires an argument."
+	#	;;
 	d | h)
        		domain=${OPTARG}
             	;;
-        #s)
-         #   urlscheme=https
-	  #  curlflag=-k
-	   # port=443
-            #;;
+  b)
+          bburp=false
+	          ;;
 	*)
             	usage
             	;;
@@ -76,12 +75,32 @@ niktoscan() {
 	nikto -host $urlscheme"://"$1 -port $2 -Format html -output "$dir/nikto.html"
 }
 
+burpstartup() {
+  java -Xbootclasspath/p:/lib/decoder_new.jar -jar /lib/burp-rest-api-2.0.1.jar --headless.mode=true --burp.jar=/lib/burpsuite_pro_v2.0beta.jar --project-file="$dir/$1.burp" 1>/dev/null 2>/dev/null &
+  echo "Waiting for burp"
+  while (curl -X HEAD -i -s http://localhost:8090/v2/api-docs 2>/dev/null 1>/dev/null)
+  do
+    echo "test"
+  done
+  echo "Done"
+
+  curl -X PUT "http://localhost:8090/burp/target/scope?url=$urlscheme://$1"
+}
+
+burprecon() {
+  http POST "http://localhost:8090/burp/spider?baseUrl=$urlscheme://$1"
+  http "http://localhost:8090/burp/spider/status" # has to be 100
+}
 
 recon() {
 # start the script here
-niktoscan $1 $2
-dowfuzz $1
-
+#niktoscan $1 $2
+#dowfuzz $1
+if [[ $bburp == "true" ]]
+then
+burpstartup $1 $2
+burprecon $1 $2
+fi
 }
 
 main() {
