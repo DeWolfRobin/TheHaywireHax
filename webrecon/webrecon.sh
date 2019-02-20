@@ -14,42 +14,39 @@ bburp=true
 
 mdir() {
  mkdir "$1" 2>/dev/null 1>/dev/null
-}
+} # works
 
-dnsscan ()
-{
-  dnsrecon -d $domain -D /usr/share/wordlists/dnsmap.txt -t axfr -j "$dir/dnsinfo.json"
-}
+dnsscan (){
+  #works
+  dnsrecon -d $domain -D "/usr/share/wordlists/dnsmap.txt" -t axfr -j "`pwd`/$dir/dnsinfo.json"
+} #works
 
 eyewithness () {
   echo "blank"
-  #To be implemented
-}
+} #To be implemented
 
 spoofcheck () {
-  domain="synergiejobs.be"
-  dir="/root/TheHaywireHax/synergiejobs.be/20-02-2019 09:34:19"
-  plugins/spoofcheck/spoofcheck.py $domain > "$dir/$domain-spoof.txt"
-}
+  ../submodules/spoofcheck/spoofcheck.py $domain > "$dir/$domain-spoof.txt"
+} #works
 
 getsubdomains(){
   python ~/tools/Sublist3r/sublist3r.py -d $domain -t 10 -v -o "./$dir/$domain-domains.txt"
   curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain >> "$dir/$domain-domains.txt"
-}
+} #works
 
 
-screenshot(){ # to be implemented
+screenshot(){
     echo "taking a screenshot of $line"
     python ~/tools/webscreenshot/webscreenshot.py -o ./$domain/$foldername/screenshots/ -i ./$domain/$foldername/responsive-$(date +"%Y-%m-%d").txt --timeout=10 -m
-}
+} #To be implemented
 
 
 dowfuzz() {
-	wfuzz -f "$dir/wfuzz.html",html -w $wordlist -c -L -R 5 -Z --filter "c!=404" -u $urlscheme"://"$1/FUZZ
+	wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
 }
 
 niktoscan() {
-	nikto -host $urlscheme"://"$1 -port $2 -Format html -output "$dir/nikto.html"
+	nikto -host $urlscheme"://"$1 -port $2 -Format html -output "$dir/nikto/$1.html"
 }
 
 burpstartup() {
@@ -183,9 +180,13 @@ recon() {
 # remove duplicates from subdomains and urls
 
 # start the script here
-# getsubdomains
-#niktoscan $1 $2
-#dowfuzz $1
+getsubdomains
+dnsscan
+spoofcheck
+while read sub; do
+  niktoscan $sub $2
+  dowfuzz $sub
+done <"./$dir/$domain-domains.txt"
 #if [[ $bburp == "true" ]]
 #then
 #burpstartup $1 $2
@@ -198,6 +199,8 @@ if (curl -X HEAD $curlflag -i -s $domain 2>/dev/null 1>/dev/null) then
 	echo "Connected to $domain"
 	mdir "$domain"
 	mdir "$domain/$startdate"
+  mdir "$domain/$startdate/nikto"
+  mdir "$domain/$startdate/wfuzz"
 	dir="$domain/$startdate"
 	recon $domain $port
 else

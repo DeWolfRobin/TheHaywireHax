@@ -1,0 +1,3 @@
+[submodule "submodules/spoofcheck"]
+	path = submodules/spoofcheck
+	url = git@github.com:BishopFox/spoofcheck.git
