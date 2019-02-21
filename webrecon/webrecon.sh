@@ -8,7 +8,8 @@ domain=
 root=
 startdate="`date +"%d-%m-%Y %H:%M:%S"`"
 dir=
-wordlist="/usr/share/wordlists/wfuzz/general/megabeast.txt"
+# wordlist="/usr/share/wordlists/wfuzz/general/megabeast.txt"
+wordlist="/usr/share/wordlists/wfuzz/general/big.txt"
 bburp=true
 
 
@@ -148,8 +149,6 @@ recon() {
 # waybackrobots.py => mhmdiaa
 # gobuster
 # subrute
-# dnsdumpster.com
-# searchdns.netcraft.com
 # crt.sh/?q=
 # whois.arin.net
 # Zscanner
