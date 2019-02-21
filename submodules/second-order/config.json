@@ -1,0 +1,27 @@
+{
+    "Headers": {},
+
+    "Depth": 5,
+
+    "LogCrawledURLs": false,
+
+    "LogQueries": {
+        "iframe": "src",
+        "svg": "src",
+        "object": "src",
+        "script": "src"
+    },
+    "LogURLRegex": [],
+
+    "LogNon200Queries": {
+        "a": "href",
+        "iframe": "src",
+        "svg": "src",
+        "object": "src",
+        "script": "src"
+    },
+    "ExcludedURLRegex": [],
+    "ExcludedStatusCodes": [401, 403, 429, 599],
+
+    "LogInlineJS": true
+}

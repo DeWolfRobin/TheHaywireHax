@@ -4,3 +4,6 @@
 [submodule "submodules/parameth"]
 	path = submodules/parameth
 	url = git@github.com:maK-/parameth.git
+[submodule "submodules/Arjun"]
+	path = submodules/Arjun
+	url = git@github.com:s0md3v/Arjun.git

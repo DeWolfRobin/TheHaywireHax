@@ -42,26 +42,49 @@ screenshot(){
 
 dowfuzz() {
 	wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
+  cat "$dir/wfuzz/$1.html" | grep ">http.*</a>" -o | sed -e 's/....$//' -e 's/^.//' > "$dir/urls/$1.txt"
 } #works
 
 niktoscan() {
 	nikto -host $urlscheme"://"$1 -port $2 -Format html -output "$dir/nikto/$1.html"
 } #works
 
+crawlsub() {
+  while read path; do
+    getparams $path
+  done <"$dir/urls/$1.txt"
+} #works
+
+second-order() {
+  ../submodules/second-order/second-order -base $1 -output "$dir/SO/$1" -config "../submodules/second-order/config.json"
+} #To be implented
+
+getparams() {
+  name=`echo $1 | sed 's/\//_/g'`
+  pushd ../submodules/Arjun/
+  python3 arjun.py -u "$1" --get -t 10 > "../../webrecon/$dir/params/$name-params.txt"
+  python3 arjun.py -u "$1" --post -t 10 > "../../webrecon/$dir/params/$name-params.txt"
+  pushd ../../webrecon
+} #works
+
 burpstartup() {
-  java -Xbootclasspath/p:/lib/decoder_new.jar -jar /lib/burp-rest-api-2.0.1.jar --headless.mode=true --burp.jar=/lib/burpsuite_pro_v2.0beta.jar --project-file="$dir/$1.burp" 1>/dev/null 2>/dev/null &
-  echo "Waiting for burp"
+  # java -Xbootclasspath/p:/lib/decoder_new.jar -jar /lib/burp-rest-api-2.0.1.jar --headless.mode=true --burp.jar=/lib/burpsuite_pro_v2.0beta.jar --project-file="$dir/$1.burp" 1>/dev/null 2>/dev/null &
+  nohup java -jar /lib/burp-rest-api-2.0.1.jar --headless.mode=true --burp.jar=/opt/BurpSuitePro/burpsuite_pro.jar --project-file="$dir/$domain.burp" &
+  pid=`echo $!`
+  i=0
   while [ $(curl --write-out %{http_code} --silent --output /dev/null -m 5 "http://localhost:8090/v2/api-docs") = 000 ]
   do
-    echo "Waiting for burp"
-    sleep 0.5
+    echo -e -n "Waiting for burp ($i s)\r"
+    sleep 1
+    i=$(($i+1))
   done
-  echo "Done"
-  echo "Adding $urlscheme://$1 to the scope"
-  curl -X PUT "http://localhost:8090/burp/target/scope?url=$urlscheme://$1"
-} #To be implemented
+  echo "\nDone"
+  # kill $pid OR curl "http://localhost:8090/burp/stop"
+} #Works
 
 burprecon() {
+  echo "Adding $urlscheme://$1 to the scope"
+  curl -X PUT "http://localhost:8090/burp/target/scope?url=$urlscheme://$1"
   echo "Adding $urlscheme://$1 to spider"
   http POST "http://localhost:8090/burp/spider?baseUrl=$urlscheme://$1" 1>/dev/null
   while [ `http "http://localhost:8090/burp/spider/status" | jq -r ".spiderPercentage"` != 100 ]
@@ -119,7 +142,6 @@ domain=`echo $domain | sed "s/^$urlscheme:\/\///g"`
 
 recon() {
   echo ""
-  # Parameth has build errors
   # Recon-ng
   # Aquatone
 # waybackurls.py => mhmdiaa
@@ -151,12 +173,17 @@ recon() {
 
 
 # start the script here
+burpstartup
 getsubdomains
 dnsscan
 spoofcheck
 while read sub; do
+  echo $sub
   niktoscan $sub $2
   dowfuzz $sub
+  # second-order "$urlscheme://$sub"
+  crawlsub $sub
+  burprecon $sub
 done <"./$dir/$domain-domains.txt"
 # if [[ $bburp == "true" ]]
 # then
@@ -166,17 +193,22 @@ done <"./$dir/$domain-domains.txt"
 }
 
 main() {
-if (curl -k -X HEAD $curlflag -i -s $domain 2>/dev/null 1>/dev/null) then
+# if (curl -L -X HEAD $curlflag -i -s $domain 2>/dev/null 1>/dev/null) then
 	echo "Connected to $domain"
 	mdir "$domain"
 	mdir "$domain/$startdate"
   mdir "$domain/$startdate/nikto"
   mdir "$domain/$startdate/wfuzz"
+  mdir "$domain/$startdate/params"
+  mdir "$domain/$startdate/SO"
+  mdir "$domain/$startdate/urls"
 	dir="$domain/$startdate"
 	recon $domain $port
-else
-	echo "cannot connect to $domain"
-fi
+  echo `notify -i "TheHaywireHax" -t "done"`
+  curl "http://localhost:8090/burp/stop"
+# else
+# 	echo "cannot connect to $domain"
+# fi
 }
 
 main $domain
