@@ -1,0 +1,379 @@
+{
+    "target_response": {
+        "zonetransfer": {
+            "enabled": false,
+            "list": []
+        },
+        "target": "synergiejobs.be",
+        "hostname": "synergiejobs.be",
+        "virustotal": [],
+        "alias": [],
+        "wildcard": {
+            "detected": {},
+            "test_target": "fblwv.synergiejobs.be",
+            "enabled": false,
+            "http_response": {}
+        },
+        "ipaddress": [
+            "212.123.10.162"
+        ],
+        "response_time": "0.0967988967896",
+        "http_response": {
+            "status": {
+                "reason": "Moved Permanently",
+                "code": 301
+            },
+            "http_headers": {
+                "expires": "Wed, 06 Mar 2019 11:44:17 GMT",
+                "server": "Apache",
+                "location": "https://www.synergiejobs.be/",
+                "cache-control": "max-age=1209600",
+                "date": "Wed, 20 Feb 2019 11:44:17 GMT",
+                "content-type": "text/html; charset=iso-8859-1"
+            }
+        }
+    },
+    "found": {
+        "subdomain": [
+            "synergiejobs.be",
+            "citrix.synergiejobs.be",
+            "testing.synergiejobs.be",
+            "gitlab.synergiejobs.be",
+            "directory.synergiejobs.be",
+            "pbx.synergiejobs.be",
+            "phone.synergiejobs.be",
+            "m.synergiejobs.be",
+            "reports.synergiejobs.be",
+            "www.synergiejobs.be",
+            "api.synergiejobs.be",
+            "win.synergiejobs.be",
+            "jenkins.synergiejobs.be",
+            "staging.synergiejobs.be",
+            "online.synergiejobs.be",
+            "mail.synergiejobs.be"
+        ],
+        "ipaddress": [
+            "37.59.204.186",
+            "84.198.248.217",
+            "212.123.10.163",
+            "84.198.248.209",
+            "212.123.10.165",
+            "212.123.10.164",
+            "212.123.10.167",
+            "212.123.10.161",
+            "212.123.10.173",
+            "212.123.10.170",
+            "212.123.10.162",
+            "212.123.10.169"
+        ],
+        "csv": [
+            "84.198.248.209,301,host,api.synergiejobs.be,Apache",
+            "212.123.10.167,302,host,citrix.synergiejobs.be,",
+            "84.198.248.217,,alias,directory.synergiejobs.be,",
+            "84.198.248.217,,host,phone.synergiejobs.be,",
+            "212.123.10.170,301,alias,jenkins.synergiejobs.be,nginx/1.10.3",
+            "212.123.10.170,301,host,gitlab.synergiejobs.be,nginx/1.10.3",
+            "212.123.10.162,302,alias,m.synergiejobs.be,Apache",
+            "212.123.10.162,302,host,synergiejobs.be,Apache",
+            "212.123.10.161,302,host,mail.synergiejobs.be,Microsoft-IIS/8.5",
+            "212.123.10.173,302,host,online.synergiejobs.be,Apache",
+            "212.123.10.165,,host,pbx.synergiejobs.be,",
+            "84.198.248.217,,host,phone.synergiejobs.be,",
+            "212.123.10.164,302,host,reports.synergiejobs.be,Microsoft-IIS/8.5",
+            "212.123.10.163,,host,staging.synergiejobs.be,",
+            "37.59.204.186,301,host,testing.synergiejobs.be,Apache",
+            "212.123.10.169,301,host,win.synergiejobs.be,Apache",
+            "212.123.10.162,301,host,www.synergiejobs.be,Apache"
+        ]
+    },
+    "subdomain_response": [
+        {
+            "target": "api.synergiejobs.be",
+            "hostname": "api.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "84.198.248.209"
+            ],
+            "response_time": "0.1016061306",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "date": "Wed, 20 Feb 2019 11:44:19 GMT",
+                    "content-type": "text/html; charset=iso-8859-1",
+                    "location": "https://api.synergiejobs.be/",
+                    "server": "Apache"
+                }
+            }
+        },
+        {
+            "target": "citrix.synergiejobs.be",
+            "hostname": "citrix.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.167"
+            ],
+            "response_time": "0.0945281982422",
+            "http_response": {
+                "status": {
+                    "reason": "Object Moved",
+                    "code": 302
+                },
+                "http_headers": {
+                    "connection": "close",
+                    "content-type": "text/html",
+                    "location": "https://citrix.synergiejobs.be/",
+                    "cache-control": "private"
+                }
+            }
+        },
+        {
+            "target": "directory.synergiejobs.be",
+            "hostname": "phone.synergiejobs.be",
+            "alias": [
+                "directory.synergiejobs.be"
+            ],
+            "ipaddress": [
+                "84.198.248.217"
+            ],
+            "response_time": "10.1060810089",
+            "http_response": {}
+        },
+        {
+            "target": "jenkins.synergiejobs.be",
+            "hostname": "gitlab.synergiejobs.be",
+            "alias": [
+                "jenkins.synergiejobs.be"
+            ],
+            "ipaddress": [
+                "212.123.10.170"
+            ],
+            "response_time": "0.149709939957",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "content-length": "185",
+                    "server": "nginx/1.10.3",
+                    "connection": "keep-alive",
+                    "location": "https://gitlab.synergiejobs.be/",
+                    "date": "Wed, 20 Feb 2019 11:44:50 GMT",
+                    "content-type": "text/html"
+                }
+            }
+        },
+        {
+            "target": "m.synergiejobs.be",
+            "hostname": "synergiejobs.be",
+            "alias": [
+                "m.synergiejobs.be"
+            ],
+            "ipaddress": [
+                "212.123.10.162"
+            ],
+            "response_time": "0.155616998672",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "expires": "Wed, 06 Mar 2019 11:44:53 GMT",
+                    "server": "Apache",
+                    "location": "https://www.synergiejobs.be/",
+                    "cache-control": "max-age=1209600",
+                    "date": "Wed, 20 Feb 2019 11:44:53 GMT",
+                    "content-type": "text/html; charset=iso-8859-1"
+                }
+            }
+        },
+        {
+            "target": "mail.synergiejobs.be",
+            "hostname": "mail.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.161"
+            ],
+            "response_time": "0.0941359996796",
+            "http_response": {
+                "status": {
+                    "reason": "Redirect",
+                    "code": 302
+                },
+                "http_headers": {
+                    "content-length": "151",
+                    "x-powered-by": "ASP.NET",
+                    "server": "Microsoft-IIS/8.5",
+                    "location": "https://mail.synergiejobs.be",
+                    "date": "Wed, 20 Feb 2019 11:44:54 GMT",
+                    "content-type": "text/html; charset=UTF-8"
+                }
+            }
+        },
+        {
+            "target": "online.synergiejobs.be",
+            "hostname": "online.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.173"
+            ],
+            "response_time": "0.100604057312",
+            "http_response": {
+                "status": {
+                    "reason": "Found",
+                    "code": 302
+                },
+                "http_headers": {
+                    "date": "Wed, 20 Feb 2019 11:44:59 GMT",
+                    "content-type": "text/html; charset=iso-8859-1",
+                    "location": "https://online.synergiejobs.be/",
+                    "server": "Apache"
+                }
+            }
+        },
+        {
+            "target": "pbx.synergiejobs.be",
+            "hostname": "pbx.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.165"
+            ],
+            "response_time": "5.06797194481",
+            "http_response": {}
+        },
+        {
+            "target": "phone.synergiejobs.be",
+            "hostname": "phone.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "84.198.248.217"
+            ],
+            "response_time": "5.06049203873",
+            "http_response": {}
+        },
+        {
+            "target": "reports.synergiejobs.be",
+            "hostname": "reports.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.164"
+            ],
+            "response_time": "0.107622861862",
+            "http_response": {
+                "status": {
+                    "reason": "Object moved",
+                    "code": 302
+                },
+                "http_headers": {
+                    "content-length": "152",
+                    "x-powered-by": "ASP.NET",
+                    "set-cookie": "ASPSESSIONIDSASQAATR=FOLFFPGCPCKJGLFJIBDDMAPH; path=/",
+                    "server": "Microsoft-IIS/8.5",
+                    "location": "https://reports.synergiejobs.be",
+                    "cache-control": "private",
+                    "date": "Wed, 20 Feb 2019 11:45:15 GMT",
+                    "content-type": "text/html"
+                }
+            }
+        },
+        {
+            "target": "staging.synergiejobs.be",
+            "hostname": "staging.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.163"
+            ],
+            "response_time": "5.06944608688",
+            "http_response": {}
+        },
+        {
+            "target": "testing.synergiejobs.be",
+            "hostname": "testing.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "37.59.204.186"
+            ],
+            "response_time": "0.104002952576",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "date": "Wed, 20 Feb 2019 11:45:27 GMT",
+                    "vary": "Accept-Encoding",
+                    "content-type": "text/html; charset=iso-8859-1",
+                    "location": "https://testing.synergiejobs.be/",
+                    "server": "Apache"
+                }
+            }
+        },
+        {
+            "target": "win.synergiejobs.be",
+            "hostname": "win.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.169"
+            ],
+            "response_time": "0.105793952942",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "date": "Wed, 20 Feb 2019 11:45:32 GMT",
+                    "content-type": "text/html; charset=iso-8859-1",
+                    "location": "https://evaluations.synergiejobs.be/",
+                    "server": "Apache"
+                }
+            }
+        },
+        {
+            "target": "www.synergiejobs.be",
+            "hostname": "www.synergiejobs.be",
+            "alias": [],
+            "ipaddress": [
+                "212.123.10.162"
+            ],
+            "response_time": "0.100964069366",
+            "http_response": {
+                "status": {
+                    "reason": "Moved Permanently",
+                    "code": 301
+                },
+                "http_headers": {
+                    "expires": "Wed, 06 Mar 2019 11:45:33 GMT",
+                    "server": "Apache",
+                    "location": "https://www.synergiejobs.be/",
+                    "cache-control": "max-age=1209600",
+                    "date": "Wed, 20 Feb 2019 11:45:33 GMT",
+                    "content-type": "text/html; charset=iso-8859-1"
+                }
+            }
+        }
+    ],
+    "info": {
+        "wordlist": {
+            "item_count": 1919,
+            "filename": "/usr/lib/python2.7/dist-packages/knockpy/wordlist/wordlist.txt"
+        },
+        "time_start": "2019-02-20 12:44:17.034765",
+        "knockpy": {
+            "url": "https://github.com/guelfoweb/knock",
+            "query": [
+                "/usr/bin/knockpy",
+                "synergiejobs.be",
+                "--json"
+            ],
+            "version": "4.1"
+        },
+        "time_end": "2019-02-20 12:44:17.320503",
+        "sub_count": 16,
+        "ip_count": 12
+    }
+}

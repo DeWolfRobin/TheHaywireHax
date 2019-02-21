@@ -1,3 +1,6 @@
 [submodule "submodules/spoofcheck"]
 	path = submodules/spoofcheck
 	url = git@github.com:BishopFox/spoofcheck.git
+[submodule "submodules/parameth"]
+	path = submodules/parameth
+	url = git@github.com:maK-/parameth.git
