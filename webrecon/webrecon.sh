@@ -115,9 +115,6 @@ echo -e "Usage:\n\t$0 [-d] <domain>\n\nOptions:\n\t-b\t\t Disable burpsuite scan
 
 while getopts ":fbdh:" o; do
     case "${o}" in
-	#:)
-	#	echo "Option -$OPTARG requires an argument."
-	#	;;
   h)
        		usage
             	;;
@@ -128,7 +125,7 @@ while getopts ":fbdh:" o; do
           bburp=false
 	          ;;
   f)
-          "$2"
+          "${OPTARG}"
 	          ;;
 	*)
             	usage
@@ -195,18 +192,15 @@ while read sub; do
   niktoscan $sub $2
   dowfuzz $sub
   # second-order "$urlscheme://$sub"
-  # crawlsub $sub
-  burprecon $sub
+  crawlsub $sub
+  # if [[ $bburp == "true" ]]
+  # then
+  # burprecon $sub
+  # fi
 done <"./$dir/$domain-domains.txt"
-# if [[ $bburp == "true" ]]
-# then
-# burpstartup $1 $2
-# burprecon $1 $2
-# fi
 }
 
 main() {
-# if (curl -L -X HEAD $curlflag -i -s $domain 2>/dev/null 1>/dev/null) then
 	echo "Connected to $domain"
 	mdir "$domain"
 	mdir "$domain/$startdate"
@@ -219,9 +213,6 @@ main() {
 	recon $domain $port
   echo `notify -i "$domain: Scan done" -t "saved in $dir"`
   curl "http://localhost:8090/burp/stop"
-# else
-# 	echo "cannot connect to $domain"
-# fi
 }
 
 main $domain
