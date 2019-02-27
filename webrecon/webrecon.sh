@@ -4,7 +4,7 @@
 port=80
 urlscheme=http
 curlflag=
-domain=
+domaix
 root=
 startdate="`date +"%d-%m-%Y %H:%M:%S"`"
 dir=
