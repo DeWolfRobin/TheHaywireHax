@@ -1,5 +1,5 @@
 webrecon/*
 
 !webrecon/webrecon.sh
-!webrecon/inc/*
+!webrecon/inc/
 !webrecon/install.sh
