@@ -3,19 +3,24 @@ mdir() {
 } # works
 
 dnsscan (){
-  dnsrecon -d $domain -D "/usr/share/wordlists/dnsmap.txt" -t axfr -j "`pwd`/$dir/dnsinfo.json"
+  #active
+  proxychains dnsrecon -d $domain -D "/usr/share/wordlists/dnsmap.txt" -t axfr -j "`pwd`/$dir/dnsinfo.json" 2>/dev/null
 } #works
 
 spoofcheck () {
+  #active
   ../submodules/spoofcheck/spoofcheck.py $domain > "$dir/$domain-spoof.txt"
 } #works
 
 getsubdomains(){
+  #passive
   python ~/tools/Sublist3r/sublist3r.py -d $domain -t 10 -v -o "./$dir/$domain-domains.txt"
+  #passive
   curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain >> "$dir/$domain-domains.txt"
+  #passive
   knockpy $domain -j
   mv *.json "./$dir/"
-} #works
+}
 
 dowfuzz() {
 	wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
@@ -23,7 +28,8 @@ dowfuzz() {
 } #works
 
 niktoscan() {
-	nikto -host $urlscheme"://"$1 -port $2 -Format html -output "$dir/nikto/$1.html"
+  #active
+	nikto -host $1 -port $2 -Format html -output "$dir/nikto/$1.html"
 } #works
 
 crawlsub() {

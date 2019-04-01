@@ -38,14 +38,14 @@ recon() {
 
 
 # start the script here
+tor 1>/dev/null
 burpstartup
 getsubdomains
 dnsscan
-spoofcheck
+# spoofcheck # errors due to specific lib
 while read sub; do
-  echo $sub
   niktoscan $sub $2
-  dowfuzz $sub
+  # dowfuzz $sub
   # second-order "$urlscheme://$sub"
   # crawlsub $sub
   # if [[ $bburp == "true" ]]
