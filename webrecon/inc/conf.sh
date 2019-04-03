@@ -7,3 +7,4 @@ startdate="`date +"%d-%m-%Y %H:%M:%S"`"
 dir=
 wordlist="wfuzz/general/big.txt"
 bburp=true
+proxy="proxychains"

@@ -1,4 +1,4 @@
-while getopts ":fbdh:" o; do
+while getopts ":fbtdh:" o; do
     case "${o}" in
   h)
        		usage
@@ -8,6 +8,9 @@ while getopts ":fbdh:" o; do
             	;;
   b)
           bburp=false
+	          ;;
+  t)
+          proxy=""
 	          ;;
   f)
           "${OPTARG}"

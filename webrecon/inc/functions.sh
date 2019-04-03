@@ -13,6 +13,7 @@ spoofcheck () {
 } #works
 
 getsubdomains(){
+  echo $domain >> "$dir/$domain-domains.txt"
   #passive
   python ~/tools/Sublist3r/sublist3r.py -d $domain -t 10 -v -o "./$dir/$domain-domains.txt"
   #passive
@@ -24,7 +25,8 @@ getsubdomains(){
 }
 
 dowfuzz() {
-	proxychains wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
+	# proxychains wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
+  $proxy wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
   cat "$dir/wfuzz/$1.html" | grep ">http.*</a>" -o | sed -e 's/....$//' -e 's/^.//' | sort | uniq > "$dir/urls/$1.txt"
 } #works
 
@@ -32,7 +34,7 @@ niktoscan() {
   #active
   # FEATURE => scan on all website ports (detect with nmap?)
   # PROXYCHAINS doesn't work yet
-	nikto -host $urlscheme://$1 -port $2 -Format html -output "$dir/nikto/$1.html"
+	nikto -host $1 -port $2 -Format htm -output - > "$dir/nikto/$1.html"
 } #works
 
 crawlsub() {

@@ -39,15 +39,15 @@ recon() {
 
 # start the script here
 tor 1>/dev/null
-burpstartup
+# burpstartup
 getsubdomains
 # dnsscan
 # spoofcheck # errors due to specific lib
 while read sub; do
-  # niktoscan $sub $2
+  niktoscan $sub $2
   dowfuzz $sub
   # second-order "$urlscheme://$sub"
-  crawlsub $sub
+  # crawlsub $sub
   # if [[ $bburp == "true" ]]
   # then
   # burprecon $sub
