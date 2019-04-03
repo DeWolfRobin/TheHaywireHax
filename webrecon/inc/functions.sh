@@ -4,7 +4,7 @@ mdir() {
 
 dnsscan (){
   #active
-  proxychains dnsrecon -d $domain -D "/usr/share/wordlists/dnsmap.txt" -t axfr -j "`pwd`/$dir/dnsinfo.json" 2>/dev/null
+  proxychains dnsrecon -d $domain -D "dnsmap.txt" -t axfr -j "`pwd`/$dir/dnsinfo.json" 2>/dev/null
 } #works
 
 spoofcheck () {
@@ -20,16 +20,19 @@ getsubdomains(){
   #passive
   knockpy $domain -j
   mv *.json "./$dir/"
+  echo $(cat "./$dir/$domain-domains.txt") | sed 's/ /\n/g' | sort | uniq > "./$dir/$domain-domains-sorted.txt"
 }
 
 dowfuzz() {
-	wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
+	proxychains wfuzz -f "$dir/wfuzz/$1.html",html -w $wordlist -t 10 -c -L -R 5 -Z --filter "c!=404" -u "$urlscheme://$1/FUZZ"
   cat "$dir/wfuzz/$1.html" | grep ">http.*</a>" -o | sed -e 's/....$//' -e 's/^.//' | sort | uniq > "$dir/urls/$1.txt"
 } #works
 
 niktoscan() {
   #active
-	nikto -host $1 -port $2 -Format html -output "$dir/nikto/$1.html"
+  # FEATURE => scan on all website ports (detect with nmap?)
+  # PROXYCHAINS doesn't work yet
+	nikto -host $urlscheme://$1 -port $2 -Format html -output "$dir/nikto/$1.html"
 } #works
 
 crawlsub() {
@@ -41,9 +44,9 @@ crawlsub() {
 getparams() {
   name=`echo $1 | sed 's/\//_/g'`
   pushd ../submodules/Arjun/
-  python3 arjun.py -u "$1" --get -t 10 > "../../webrecon/$dir/params/$name-params.txt"
-  python3 arjun.py -u "$1" --post -t 10 > "../../webrecon/$dir/params/$name-params.txt"
-  pushd ../../webrecon
+  python3 ../submodules/Arjun/arjun.py -u "$1" --get -t 10 > "$dir/params/$name-params.txt"
+  python3 ../submodules/Arjun/arjun.py -u "$1" --post -t 10 > "$dir/params/$name-params.txt"
+  popd
 } #works
 
 burpstartup() {

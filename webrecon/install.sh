@@ -7,3 +7,4 @@ chmod +x bbht/install.sh
 git submodule update --init --recursive
 
 pip install emailprotectionslib
+pip install httpobs-cli

@@ -3,3 +3,4 @@ webrecon/*
 !webrecon/webrecon.sh
 !webrecon/inc/
 !webrecon/install.sh
+!webrecon/wfuzz/

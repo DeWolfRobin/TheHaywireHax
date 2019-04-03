@@ -41,18 +41,18 @@ recon() {
 tor 1>/dev/null
 burpstartup
 getsubdomains
-dnsscan
+# dnsscan
 # spoofcheck # errors due to specific lib
 while read sub; do
-  niktoscan $sub $2
-  # dowfuzz $sub
+  # niktoscan $sub $2
+  dowfuzz $sub
   # second-order "$urlscheme://$sub"
-  # crawlsub $sub
+  crawlsub $sub
   # if [[ $bburp == "true" ]]
   # then
   # burprecon $sub
   # fi
-done <"./$dir/$domain-domains.txt"
+done <"./$dir/$domain-domains-sorted.txt"
 }
 
 main() {
